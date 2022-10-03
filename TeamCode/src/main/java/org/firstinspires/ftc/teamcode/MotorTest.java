@@ -20,13 +20,13 @@ public class MotorTest extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-        RunMotors(1000);
+        RunMotors(10000);
 
     }
 
     public void RunMotors(long timeoutA) {
         if (opModeIsActive()) {
-            robot.setMotorPowers(0*TURN_SPEED, 0*TURN_SPEED, 0*TURN_SPEED, -TURN_SPEED, 0);
+            robot.setMotorPowers(0*TURN_SPEED, 3*TURN_SPEED, 2*TURN_SPEED, 1*TURN_SPEED, 0);
             runtime.reset();
             sleep(timeoutA);
             robot.setMotorPowers(0);

@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="ConeMover", group="Autonomous")
-public class ConeMovers extends LinearOpMode {
+@Autonomous(name="ConeMoverLtR", group="Autonomous")
+public class ConeMoversLtR extends LinearOpMode {
 
 
     HardwarePushbot robot = new HardwarePushbot();   // Use a Pushbot's hardware
@@ -29,23 +29,30 @@ public class ConeMovers extends LinearOpMode {
         telemetry.update();
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        TurnRight(1500);
-        TurnLeft(1500);
-        StrafeRight(4000);
-        MoveForward(6000);
+        StrafeRight(3000);
+        sleep(1000);
+        MoveForward(1000);
+        sleep(1000);
+        MoveBackward(1000);
+        TurnRight(0);
+        TurnLeft(0);
+        StrafeLeft(0);
+
+
+
+        StrafeRight(0);
     }
     //Motor 1: Normal
-    //Motor 2: Reverse
+    //Motor 2: Normal
     //Motor 3: Normal
     //Motor 4: Reverse
     public void MoveForward(long timeoutS) {
         if (opModeIsActive()) {
-            // Remember 2 and 3 are reverse
-            robot.setMotorPowers(TURN_SPEED, TURN_SPEED, -TURN_SPEED, -TURN_SPEED, 0);
+
+            robot.setMotorPowers(TURN_SPEED, TURN_SPEED, TURN_SPEED, -TURN_SPEED, 0);
             runtime.reset();
             sleep(timeoutS);
             robot.setMotorPowers(0);
-            //  runtime.reset();
         }
     }
 
@@ -71,17 +78,45 @@ public class ConeMovers extends LinearOpMode {
         }
 
     }
-    public void StrafeRight(long timeoutD){
-//Move Backward because motor 1 and 4 are negative
-        if (opModeIsActive()){
+    public void StrafeRight(long timeoutD) {
 
-            robot.setMotorPowers(TURN_SPEED, -TURN_SPEED, TURN_SPEED, -TURN_SPEED,0);
+        if (opModeIsActive()) {
+
+            robot.setMotorPowers(TURN_SPEED, -TURN_SPEED, -TURN_SPEED, -TURN_SPEED, 0);
             runtime.reset();
             sleep(timeoutD);
             robot.setMotorPowers(0);
         }
+    }
+    public void StrafeLeft(long timeoutE) {
+
+        if (opModeIsActive()) {
+
+            robot.setMotorPowers(-TURN_SPEED, TURN_SPEED, TURN_SPEED, TURN_SPEED, 0);
+            runtime.reset();
+            sleep(timeoutE);
+            robot.setMotorPowers(0);
+
+        }
 
     }
+
+
+    public void MoveBackward(long timeoutF) {
+
+        if (opModeIsActive()) {
+
+            robot.setMotorPowers(-TURN_SPEED, -TURN_SPEED, -TURN_SPEED, TURN_SPEED, 0);
+            runtime.reset();
+            sleep(timeoutF);
+            robot.setMotorPowers(0);
+
+        }
+
+    }
+
+
+
 
 }
 
